@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  background-color: #000;
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+.hero-image {
+  object-fit: cover;
+}
+
+.nav-link {
+  color: #ccc !important;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  color: white !important;
+}
+
+.social-icons a {
+  font-size: 1.2rem;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.social-icons a:hover {
+  opacity: 0.7;
+}
+
+.btn-success {
+  background-color: #3ddc84;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #31b870;
+}

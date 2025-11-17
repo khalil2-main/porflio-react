@@ -1,0 +1,20 @@
+.navbar:hover{
+  box-shadow: orangered 0px 1px 9px;
+}
+.nav-link {
+  color: #ccc !important;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  color: white !important;
+}
+
+.social-icons a {
+  font-size: 1.2rem;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.social-icons a:hover {
+  opacity: 0.7;
+}

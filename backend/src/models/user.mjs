@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import {isEmail} from 'validator';
+import validator from "validator";
 
 const userSchema = new mongoose.Schema({
   firstname: { 
@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
     type: String, 
     required: [true, "Email is required"],
     unique: true,
-   validate: [isEmail, "Please enter a valid email"]
+   validate: [validator.isEmail, "Please enter a valid email"]
   },
 
 
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
     data: Buffer,          // stores the raw image bytes
     contentType: String    
   }
-});
+},{strict: true});
 
 userSchema.statics.login= async function(email,password){
   const user= await this.findOne({email});

@@ -32,8 +32,23 @@ const userSchema = new mongoose.Schema({
   password: { 
     type: String, 
     required: [true, "Password is required"] 
+  },
+  image: {
+    data: Buffer,          // stores the raw image bytes
+    contentType: String    
   }
 });
+
+userSchema.statics.login= async function(email,password){
+  const user= await this.findOne({email});
+  if(!user){
+    throw  Error('incorrect Email')
+  }
+  if(!comparePassword(password,user.password)){
+    throw Error("incorrect password")
+  }
+  return user;
+}
 
 
 export default mongoose.model('User', userSchema);

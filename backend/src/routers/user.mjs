@@ -1,6 +1,6 @@
 import { Router } from "express";
 import user from "../models/user.mjs";
-import { hash } from "bcrypt";
+import { hashPassword } from "../utils/helpers.mjs";
 const router = Router();
 
 
@@ -25,11 +25,11 @@ const erorrHandler= (err)=>{
     return errors;
 }
 
-
+// Register Route
 router.post('/register', async (req, res) => {
     try {
         const body = req.body;
-
+        body.password = await hashPassword(body.password);
         const newUser = await user.create(body);
 
         res.status(201).json(newUser);
@@ -41,7 +41,7 @@ router.post('/register', async (req, res) => {
         res.status(400).json(errors);
     }
 });
-
+// Auth  Route
 router.post('/login', async (req, res) => { 
     const { email, password } = req.body;
     try {
@@ -55,8 +55,14 @@ router.post('/login', async (req, res) => {
 
 });
 
-router.get('/', (req, res) => {
-    res.send('User route is working');
+router.get('/', async(req, res) => {
+   try {
+    const users= await user.find({});
+    res.status(200).json(users);
+   } catch(err){
+    res.status(500).json({error: 'Internal server error'});
+   }
+    
 });
 
 
